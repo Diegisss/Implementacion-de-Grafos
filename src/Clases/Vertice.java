@@ -17,6 +17,14 @@ public class Vertice {
         this.nombre = nombre;
         this.NumVertice = -1;
     }
+    
+    public String getNombre(){
+        return nombre;
+    }
+    
+    public int getNumVertice(){
+        return NumVertice;
+    }
 
     public String nombreVertice() {
         return nombre;
