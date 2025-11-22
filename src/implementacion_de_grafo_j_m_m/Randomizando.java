@@ -8,12 +8,13 @@ package implementacion_de_grafo_j_m_m;
  *
  * @author diego123
  */
-public class Implementacion_De_Grafo_J_M_M {
+public class Randomizando {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.out.println("Implementando Dockers");
     }
     
 }
