@@ -26,13 +26,9 @@ public class Vertice {
         return NumVertice;
     }
 
-    public String nombreVertice() {
-        return nombre;
-    }
-
-    public boolean identico(Vertice x) {
+    /*public boolean identico(Vertice x) {
         return nombre.equals(x.nombre);
-    }
+    }*/
 
     public void asignarVertice(int x) {
         NumVertice = x;

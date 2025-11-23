@@ -21,7 +21,9 @@ public class Grafo {
     }
 
     public void AgregarVertice(String nombre) {
-        vertices.add(new Vertice(nombre));
+        Vertice verti = new Vertice(nombre);
+        verti.asignarVertice(vertices.size());
+        vertices.add(verti);
         adyacencia.add(new ArrayList<>());
     }
 
@@ -33,5 +35,26 @@ public class Grafo {
 
         }
         return -1;
+    }
+    public void AgregarArista(String origen, String des, int peso){
+        int ori = BuscarVerIndice(origen);
+        int dest = BuscarVerIndice(des);
+        
+        if (ori == -1 || dest == -1){
+            System.out.println("El vertice no existe");
+            return;
+        }
+        adyacencia.get(ori).add(new Arista(vertices.get(dest), peso));
+    }
+    
+    public void mostrar(){
+        System.out.println("LISTA ADYACENTE");
+        for (int i = 0; i < vertices.size(); i++) {
+            System.out.print(vertices.get(i).getNombre() + "--->");
+            for (Arista a : adyacencia.get(i)) {
+                System.out.print(a  + " ");
+            }
+            System.out.println();    
+        }   
     }
 }

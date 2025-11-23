@@ -9,21 +9,12 @@ package Clases;
  * @author diego123
  */
 public class Arista {
-    private Vertice origen, des;
+    private Vertice des;
     private int peso;
-    
-    public Arista(Vertice origen, Vertice des){
-        this(origen, des, 1);
-    }
-    
-    public Arista(Vertice origen, Vertice des, int peso){
-        this.origen = origen;
+
+    public Arista(Vertice des, int peso){
         this.des = des;
         this.peso = peso;
-    }
-    
-    public Vertice getOrigen(){
-        return origen;
     }
 
     public Vertice getDes() {
@@ -35,6 +26,6 @@ public class Arista {
     }
     @Override
     public String toString(){
-        return origen.getNombre() + des.getNombre() + "peso" + " ("+ peso + ")";
+        return des.getNombre() + " peso (" + peso + ")";
     }
 }
