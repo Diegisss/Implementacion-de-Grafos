@@ -3,46 +3,76 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Recorridos;
+
 import Clases.Arista;
 import Clases.Grafo;
 import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Queue;;
+
 /**
  *
  * @author diego123
  */
 public class recorridoAnchura {
-    private Grafo grafo;
-    int actual, dest;
-    public recorridoAnchura(Grafo grafo){
-        this.grafo = grafo;
+
+    public static boolean recorridoAnchura(Grafo grafo, String ini, String obj) {
+        int indiceI = grafo.buscar(ini);
+        int indiceO = grafo.buscar(obj);
+        if (indiceI == -1 || indiceO == -1) {
+            System.out.println("El vértice no existe");
+            return false;
+        }
+        
+        Queue<Integer> cola = new LinkedList<>();
+        boolean[] visitarN = new boolean[grafo.verticesT()];
+        
+        visitarN[indiceI] = true;
+        cola.add(indiceI);
+        int actual; 
+        while(!cola.isEmpty()){
+            actual = cola.poll();
+            
+            if(actual == indiceO){
+                System.out.println("Encontrado " + obj);
+                return true;
+            }
+            for (int w = 0; w < grafo.verticesT(); w++) {
+                if (grafo.aristaE(actual, w) && !visitarN[w]){
+                    visitarN[w] = true;
+                    cola.add(w);
+                }
+            }
+        }
+        System.out.println(obj + " No encontrado");
+        return false;
     }
     
-    public void recorrer(String nombre){
-        int iniciar = grafo.BuscarVerIndice(nombre);
-        
-        if (iniciar == -1){
-            System.out.println("Vertice no encontrado o inexistente");
+    public static void recorresAnchura(Grafo grafo, String ori) {
+        int indiceO = grafo.buscar(ori);
+        if (indiceO == -1) {
+            System.out.println("El vertice " + ori + " no existe");
             return;
         }
         
-        boolean[] visitado = new boolean[grafo.getNumVertice()];
         Queue<Integer> cola = new LinkedList<>();
+        boolean[] visitarr = new boolean[grafo.verticesT()];
         
-        visitado[iniciar] = true;
-        cola.add(iniciar);
+        visitarr[indiceO] = true;
+        cola.add(indiceO);
         
-        while(!cola.isEmpty()){
-            actual = cola.remove();
-            System.out.println(grafo.getVertice(actual).getNombre());
-            for (Arista a : grafo.getAdyacentes(actual)) {
-                dest = a.getDes().getNumVertice();
-                
-                if(!visitado[dest]){
-                    visitado[dest] = true;
-                    cola.add(dest);
-                }  
+        System.out.print("BFS desde " + ori + ": ");
+        
+        while (!cola.isEmpty()) {
+            int nodoActual = cola.poll();
+            System.out.print(grafo.getVertice(nodoActual).getNombre() + " ");
+            
+            for (int w = 0; w < grafo.verticesT(); w++) {
+                if (grafo.aristaE(nodoActual, w) && !visitarr[w]) {
+                    visitarr[w] = true;
+                    cola.add(w);
+                }
             }
         }
+        System.out.println();
     }
 }
