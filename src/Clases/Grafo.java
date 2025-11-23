@@ -120,6 +120,22 @@ public class Grafo {
         matrizA[ori][dest] = 0; //elimina la arista
         System.out.println("Arista " + origen + " -> " + des + " eliminada");
     }
+    
+    public int verticesT(){
+        return vertices.size();
+    }
+    
+    public boolean aristaE(int origen, int destino){
+        if (origen < 0 || origen >= vertices.size() 
+                || destino < 0 || destino >= vertices.size()) return false;
+        return matrizA[origen][destino] !=0;
+    }
+    
+    public Vertice getVertice(int i){
+        if (i>=0 && i<vertices.size()) return vertices.get(i);
+        
+        return null;
+    }
 
     public void mostrar() {
         System.out.println("MATRIZ ADYACENTE");
