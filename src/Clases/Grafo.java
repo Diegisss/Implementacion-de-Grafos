@@ -36,25 +36,38 @@ public class Grafo {
         }
         return -1;
     }
-    public void AgregarArista(String origen, String des, int peso){
+
+    public void AgregarArista(String origen, String des, int peso) {
         int ori = BuscarVerIndice(origen);
         int dest = BuscarVerIndice(des);
-        
-        if (ori == -1 || dest == -1){
+
+        if (ori == -1 || dest == -1) {
             System.out.println("El vertice no existe");
             return;
         }
         adyacencia.get(ori).add(new Arista(vertices.get(dest), peso));
     }
-    
-    public void mostrar(){
+
+    public void mostrar() {
         System.out.println("LISTA ADYACENTE");
         for (int i = 0; i < vertices.size(); i++) {
             System.out.print(vertices.get(i).getNombre() + "--->");
             for (Arista a : adyacencia.get(i)) {
-                System.out.print(a  + " ");
+                System.out.print(a + " ");
             }
-            System.out.println();    
-        }   
+            System.out.println();
+        }
+    }
+
+    public int getNumVertice() {
+        return vertices.size();
+    }
+
+    public Vertice getVertice(int v) {
+        return vertices.get(v);
+    }
+
+    public ArrayList<Arista> getAdyacentes(int a) {
+        return adyacencia.get(a);
     }
 }
