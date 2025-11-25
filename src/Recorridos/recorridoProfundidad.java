@@ -1,16 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Recorridos;
 import Clases.Grafo;
-
 import java.util.Stack;
 /**
  *
- * @author diego123
+ * @author diego jaimes escobar
  */
 public class recorridoProfundidad {
+    //verificar si y solo si existe un camino para los vertices
     public static boolean recorridoProfundidad(Grafo grafo, String ini, String obj){
         int indiceI = grafo.buscar(ini);
         int indiceO = grafo.buscar(obj);
@@ -22,7 +18,7 @@ public class recorridoProfundidad {
         boolean[] visitarN = new boolean[grafo.verticesT()];
         
         pila.push(indiceI);
-        visitarN[indiceO] = true;
+        visitarN[indiceI] = true;
         
         int actual;
         while(!pila.isEmpty()){
@@ -43,7 +39,7 @@ public class recorridoProfundidad {
         System.out.println(obj + " No encontrado");
         return false;
     }
-    
+
     public static void recorresProfundidad(Grafo grafo, String ori){
         int indiceO = grafo.buscar(ori);
         
@@ -58,10 +54,11 @@ public class recorridoProfundidad {
         pila.push(indiceO);
         visitarN[indiceO] = true;
         
+        System.out.print("Recorrido de Profundidad desde " + ori + ":\n ");
         int actual;
         while(!pila.isEmpty()){
             actual = pila.pop();
-            System.out.println(grafo.getVertice(actual).getNombre());
+            System.out.print(grafo.getVertice(actual).getNombre() + " ");
             
             for (int w = 0; w < grafo.verticesT(); w++) {
                 if(grafo.aristaE(actual, w) && !visitarN[w]){

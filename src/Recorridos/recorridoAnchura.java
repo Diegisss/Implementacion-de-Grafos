@@ -1,20 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Recorridos;
 
-import Clases.Arista;
 import Clases.Grafo;
 import java.util.LinkedList;
 import java.util.Queue;;
 
 /**
  *
- * @author diego123
+ * @author diego jaimes escobar
  */
 public class recorridoAnchura {
-
+    //como podria comenzar......
+    // ya se :D
     public static boolean recorridoAnchura(Grafo grafo, String ini, String obj) {
         int indiceI = grafo.buscar(ini);
         int indiceO = grafo.buscar(obj);
@@ -60,14 +56,14 @@ public class recorridoAnchura {
         visitarr[indiceO] = true;
         cola.add(indiceO);
         
-        System.out.print("BFS desde " + ori + ": ");
-        
+        System.out.print("Recorrido de Anchura desde " + ori + ":\n ");
+        int actual;
         while (!cola.isEmpty()) {
-            int nodoActual = cola.poll();
-            System.out.print(grafo.getVertice(nodoActual).getNombre() + " ");
+            actual = cola.poll();
+            System.out.print(grafo.getVertice(actual).getNombre() + " ");
             
             for (int w = 0; w < grafo.verticesT(); w++) {
-                if (grafo.aristaE(nodoActual, w) && !visitarr[w]) {
+                if (grafo.aristaE(actual, w) && !visitarr[w]) {
                     visitarr[w] = true;
                     cola.add(w);
                 }
