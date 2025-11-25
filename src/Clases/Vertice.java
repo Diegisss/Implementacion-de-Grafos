@@ -1,11 +1,13 @@
 package Clases;
-
-import static Clases.VerticeG.d;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  *
- * @author diego123
+ * @author diego jaimes escobar
  */
 public class Vertice {
 
@@ -44,16 +46,31 @@ public class Vertice {
     }
     
     public void pintar(Graphics g) {
-        g.drawOval(this.x - d / 2, this.y - d / 2, d, d);
-        g.drawString(nombre, x - nombre.length() * 3, y);
+        Graphics2D g2 = (Graphics2D) g; 
+        g2.setColor(Color.GREEN); 
+        g2.fillOval(this.x - d / 2, this.y - d / 2, d, d);
+        g2.setColor(Color.BLACK);
+        g2.setStroke(new BasicStroke(3));
+        g2.setFont(new Font("Arial", Font.BOLD, 14));
+        g2.drawOval(this.x - d / 2, this.y - d / 2, d, d);
+        g2.drawString(nombre, x - nombre.length() * 3, y +4);
     }
-
+    
+    //getters y setters
     public int getX() {
         return x;
     }
 
     public int getY() {
         return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
     
     @Override

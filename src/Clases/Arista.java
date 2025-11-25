@@ -2,6 +2,7 @@ package Clases;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -44,6 +45,7 @@ public class Arista {
        
         //se colorea de color rojo las letras que acompañan a la arista (etiqueta)
         g2.setColor(Color.RED);
+        g2.setFont(new Font("Arial", Font.BOLD, 12));
         g2.drawString(ori.getNombre() + " , " + des.getNombre(), mx, my);
  
 
