@@ -28,8 +28,8 @@ public class recorridoProfundidad {
                 System.out.println("Encontrado " + obj);
                 return true;
             }
-            
-            for (int w = 0; w < grafo.verticesT(); w++) {
+            for (int w = grafo.verticesT() - 1; w >= 0; w--){
+            //for (int w = 0; w < grafo.verticesT(); w++) {
                 if(grafo.aristaE(actual, w) && !visitarN[w]){
                     pila.push(w);
                     visitarN[w] = true;
@@ -59,8 +59,8 @@ public class recorridoProfundidad {
         while(!pila.isEmpty()){
             actual = pila.pop();
             System.out.print(grafo.getVertice(actual).getNombre() + " ");
-            
-            for (int w = 0; w < grafo.verticesT(); w++) {
+            for (int w = grafo.verticesT() - 1; w >= 0; w--){
+            //for (int w = 0; w < grafo.verticesT(); w++) {
                 if(grafo.aristaE(actual, w) && !visitarN[w]){
                     pila.push(w);
                     visitarN[w] = true;
