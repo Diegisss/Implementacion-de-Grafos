@@ -1,18 +1,20 @@
 
 package Clases;
-
 import java.util.ArrayList;
 
 /**
  *
- * @author diego123
+ * @author diego jaimes escobar
  */
 
 public class Grafo {
-
+    
+    //listas
     private ArrayList<Vertice> vertices;
-    private int[][] matrizA;
-
+    private ArrayList<Arista> ari = new ArrayList<>();
+    private int[][] matrizA; //matriz
+    
+    //constructor
     public Grafo() {
         vertices = new ArrayList<>();
     }
@@ -37,7 +39,7 @@ public class Grafo {
         }
         matrizA = nuevaM; //reemplazamos
 
-        System.out.println("Vértice " + nombre + " agregado");
+        System.out.println("Vertice " + nombre + " agregado");
     }
 
     public void eliminarVertice(String nombre) {
@@ -77,8 +79,16 @@ public class Grafo {
         for (int i = 0; i < vertices.size(); i++) {
             vertices.get(i).asignarVertice(i);
         }
-
-        System.out.println("Vértice " + nombre + " eliminado");
+        
+        ArrayList<Arista> aEliminar = new ArrayList<>();
+        for (Arista a : ari) {
+            if (a.getOri().getNombre().equals(nombre) || a.getDes().getNombre().equals(nombre)) {
+                aEliminar.add(a);
+            }
+        }
+        ari.removeAll(aEliminar);
+        
+        System.out.println("Vertice " + nombre + " eliminado");
     }
 
     public int buscar(String nombre) { //recorremos por todos los vertices en busca de el nombre
@@ -90,7 +100,7 @@ public class Grafo {
         return -1; //en caso contrario si no lo encuentra
     }
 
-    public void AgregarArista(String origen, String des, int peso) {
+    public void AgregarArista(String origen, String des) {
         int ori = buscar(origen);
         int dest = buscar(des);
 
@@ -100,8 +110,17 @@ public class Grafo {
         }
         //simplemente agrega la arista en la matriz
         //dicho de otra manera ori es fila y dest es columna
-        matrizA[ori][dest] = peso;
-        System.out.println("Arista " + origen + " -> " + des + " agregada (peso: " + peso + ")");
+        
+        //matrizA[ori][dest] = peso;
+        matrizA[ori][dest] = 1;
+        
+        Vertice v1 = vertices.get(ori);
+        Vertice v2 = vertices.get(dest);
+
+        // Crear la arista con posiciones
+        Arista a = new Arista(v1,v2);
+        ari.add(a);
+        System.out.println("Arista " + origen + " -> " + des + " agregada");
     }
 
     public void EliminarArista(String origen, String des) {
@@ -118,33 +137,57 @@ public class Grafo {
         }
         
         matrizA[ori][dest] = 0; //elimina la arista
+        Arista remover = null;
+        for (Arista a : ari) {
+            if(a.getOri().getNombre().equals(origen) && a.getDes().getNombre().equals(des)){
+                remover = a; break;
+            }
+        }
+        if(remover != null) ari.remove(remover);
         System.out.println("Arista " + origen + " -> " + des + " eliminada");
     }
     
+    //cantidad de vertices de mi grafo
     public int verticesT(){
         return vertices.size();
     }
     
+    //verificar si existen aristas entre dos indices
     public boolean aristaE(int origen, int destino){
         if (origen < 0 || origen >= vertices.size() 
                 || destino < 0 || destino >= vertices.size()) return false;
         return matrizA[origen][destino] !=0;
     }
     
+    //se obtienen un vertice por cada indice
     public Vertice getVertice(int i){
         if (i>=0 && i<vertices.size()) return vertices.get(i);
         
         return null;
     }
-
+    
+    //el diseño de la matriz de adyacencia
     public void mostrar() {
         System.out.println("MATRIZ ADYACENTE");
+        
+        System.out.print("      "); // espacio antes de los nombres
         for (int i = 0; i < vertices.size(); i++) {
-            System.out.print(vertices.get(i).getNombre() + "--->");
+            System.out.print(vertices.get(i).getNombre() + " ");
+        }
+        System.out.println();
+        
+        for (int i = 0; i < vertices.size(); i++) {
+            System.out.print(vertices.get(i).getNombre() + "   ");
             for (int j = 0; j < vertices.size(); j++) {
                 System.out.print(matrizA[i][j] + " ");
             }
             System.out.println();
         }
     }
+    
+    //lista grafica de las aristas
+    public ArrayList<Arista> getAri() {
+        return ari;
+    }
+    
 }
