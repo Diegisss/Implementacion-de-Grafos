@@ -364,24 +364,31 @@ public class GrafoD extends javax.swing.JFrame {
         String op = (String)JOptionPane.showInputDialog(null, "¿QUE RECORRIDO HARA?", "RECORRIDOS", JOptionPane.INFORMATION_MESSAGE, null,
                 new Object[]{"ANCHURA", "PROFUNDIDAD", "AMBOS"}, null);
         if(op == null) return;
-        
-        String vertice = JOptionPane.showInputDialog("Ingrese el vertice de origen").trim();
-        if (vertice == null || vertice.trim().isEmpty()) return;
-        
-        implementartextArea mode = new implementartextArea(grafo); //Tengo otra clase que involucra a este objeto
-        switch (op) {
-            case "ANCHURA":
-                JtextRecorridos.setText(mode.obAnchura(vertice));
-                break;
-            case "PROFUNDIDAD":
-                JtextRecorridos.setText(mode.obProfundidad(vertice));
-                break;
-            case "AMBOS":
-                JtextRecorridos.setText(mode.obAnchura(vertice) + "\n" + mode.obProfundidad(vertice));
-                break;
-            default:
-                JOptionPane.showMessageDialog(null, "ERROR");
+        try{
+            String vertice = JOptionPane.showInputDialog("Ingrese el vertice de origen");
+            if (vertice == null) return;
+            
+            vertice = vertice.trim();
+
+            implementartextArea mode = new implementartextArea(grafo); //Tengo otra clase que involucra a este objeto
+            switch (op) {
+                case "ANCHURA":
+                    JtextRecorridos.setText(mode.obAnchura(vertice));
+                    break;
+                case "PROFUNDIDAD":
+                    JtextRecorridos.setText(mode.obProfundidad(vertice));
+                    break;
+                case "AMBOS":
+                    JtextRecorridos.setText(mode.obAnchura(vertice) + "\n" + mode.obProfundidad(vertice));
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "ERROR");
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error: " + e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
+            
     }//GEN-LAST:event_MostrarRecorridoActionPerformed
 
     /**
